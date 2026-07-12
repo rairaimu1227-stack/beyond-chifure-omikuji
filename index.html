@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>文化マインドおみくじ | Beyond × ちふれ</title>
+  <title>Be⇒yondおみくじ | ちふれ × 文化服装学院</title>
   <style>
     :root {
-      --bg: #f7fbfa;
-      --mint: #a7ddd8;
-      --mint-deep: #6fc6bf;
-      --navy: #2e3f55;
-      --ink: #24323f;
-      --sub: #687682;
+      --mint: #a8d6cf;
+      --mint-logo: #93cfc8;
+      --mint-deep: #82bbb4;
+      --yellow: #fff7b0;
+      --yellow-soft: #fffbdc;
+      --gray: #858585;
+      --gray-dark: #5f6268;
+      --ink: #303846;
+      --paper: rgba(255, 255, 246, 0.92);
       --white: #ffffff;
-      --pink: #f5d8df;
-      --peach: #f7e3d0;
-      --yellow: #f6e9a8;
-      --lavender: #e8def8;
-      --line: rgba(46, 63, 85, 0.12);
-      --shadow: 0 20px 50px rgba(46, 63, 85, 0.16);
-      --radius: 28px;
+      --line: rgba(95, 98, 104, 0.18);
+      --shadow: 0 18px 50px rgba(69, 77, 87, 0.17);
     }
 
     * {
@@ -36,10 +34,9 @@
       font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 15% 10%, rgba(167, 221, 216, 0.65), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(245, 216, 223, 0.70), transparent 25%),
-        radial-gradient(circle at 50% 100%, rgba(246, 233, 168, 0.55), transparent 34%),
-        var(--bg);
+        radial-gradient(circle at 78% 19%, rgba(255, 248, 184, 0.78), transparent 17%),
+        radial-gradient(circle at 16% 38%, rgba(255, 248, 184, 0.72), transparent 14%),
+        linear-gradient(180deg, var(--mint) 0%, #d9efea 48%, var(--yellow) 49%, var(--yellow-soft) 100%);
       line-height: 1.75;
     }
 
@@ -50,8 +47,8 @@
     .screen {
       display: none;
       min-height: 100vh;
-      padding: 28px 18px;
-      animation: fadeIn 0.45s ease both;
+      padding: 22px 14px;
+      animation: fadeIn 0.35s ease both;
     }
 
     .screen.active {
@@ -70,129 +67,116 @@
       }
     }
 
-    .container {
-      width: min(900px, 100%);
+    .wrap {
+      width: min(720px, 100%);
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+    .hero-card,
+    .drawing-card,
+    .result-card {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
-    .top-card {
-      padding: clamp(24px, 5vw, 46px);
-      text-align: center;
+    .hero-card {
       position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 6vw, 48px);
+      text-align: center;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      background:
+        linear-gradient(0deg, transparent 47%, rgba(255, 248, 184, 0.82) 48%, rgba(255, 248, 184, 0.82) 52%, transparent 53%),
+        linear-gradient(35deg, transparent 47%, rgba(255, 248, 184, 0.72) 48%, rgba(255, 248, 184, 0.72) 52%, transparent 53%),
+        linear-gradient(90deg, transparent 47%, rgba(255, 248, 184, 0.82) 48%, rgba(255, 248, 184, 0.82) 52%, transparent 53%),
+        linear-gradient(145deg, transparent 47%, rgba(255, 248, 184, 0.72) 48%, rgba(255, 248, 184, 0.72) 52%, transparent 53%);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    .hero-card::before {
+      right: -62px;
+      top: -52px;
+    }
+
+    .hero-card::after {
+      left: -72px;
+      bottom: -72px;
+      transform: scale(0.74);
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
+      position: relative;
+      display: flex;
       justify-content: center;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
-      color: var(--sub);
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+      color: var(--gray-dark);
+      font-weight: 900;
+      letter-spacing: 0.08em;
     }
 
-    .brand .logo-text {
-      color: var(--navy);
-      font-size: 18px;
-      letter-spacing: 0.12em;
-    }
-
-    .brand .cross {
+    .brand .x {
       color: var(--mint-deep);
-      font-size: 22px;
+      font-size: 20px;
     }
 
-    .pill {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: rgba(167, 221, 216, 0.38);
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-    }
-
-    h1 {
-      margin: 18px 0 14px;
-      font-size: clamp(32px, 8vw, 58px);
-      line-height: 1.12;
-      letter-spacing: 0.08em;
-      color: var(--navy);
-    }
-
-    .lead {
-      max-width: 680px;
-      margin: 0 auto;
-      color: var(--sub);
-      font-size: clamp(15px, 3.7vw, 17px);
-      font-weight: 700;
-    }
-
-    .concept-box {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 28px auto 0;
-      max-width: 780px;
-      text-align: left;
-    }
-
-    .concept {
-      padding: 16px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid var(--line);
-    }
-
-    .concept strong {
+    .beyond-mark {
+      position: relative;
       display: block;
-      margin-bottom: 4px;
-      color: var(--navy);
-      font-size: 14px;
-    }
-
-    .concept span {
-      display: block;
-      color: var(--sub);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .flow {
-      margin: 28px auto 0;
-      max-width: 750px;
-      padding: 18px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, rgba(167, 221, 216, 0.25), rgba(245, 216, 223, 0.25));
-      text-align: left;
-    }
-
-    .flow-title {
-      margin: 0 0 10px;
-      color: var(--navy);
+      width: 100%;
+      margin: 10px auto 0;
+      color: var(--gray);
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+      font-size: clamp(48px, 13vw, 92px);
       font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-shadow: 2px 2px 0 rgba(255, 248, 184, 0.72);
     }
 
-    .flow ol {
-      margin: 0;
-      padding-left: 1.35em;
-      color: var(--sub);
-      font-weight: 700;
-      font-size: 14px;
+    .beyond-mark .be,
+    .beyond-mark .arrow,
+    .beyond-mark .yond {
+      color: var(--gray);
     }
 
-    .actions {
+    .omikuji-name {
+      position: relative;
+      margin: 18px 0 0;
+      color: var(--gray);
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+      font-size: clamp(34px, 10vw, 66px);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      font-weight: 900;
+      text-shadow: 2px 2px 0 rgba(255, 248, 184, 0.72);
+    }
+
+    .hero-subtitle {
+      position: relative;
+      margin: 18px auto 0;
+      max-width: 560px;
+      color: var(--gray-dark);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .actions,
+    .result-actions {
+      position: relative;
       display: flex;
       justify-content: center;
       gap: 12px;
@@ -202,516 +186,364 @@
 
     .btn {
       appearance: none;
-      border: 0;
-      border-radius: 999px;
-      padding: 15px 26px;
+      border: 2px solid var(--gray-dark);
+      border-radius: 0;
+      padding: 14px 28px;
       cursor: pointer;
       font-weight: 900;
       letter-spacing: 0.06em;
-      transition: transform 0.16s ease, opacity 0.16s ease, box-shadow 0.16s ease;
+      transition: transform 0.14s ease, opacity 0.14s ease;
     }
 
     .btn:active {
-      transform: translateY(2px) scale(0.98);
+      transform: translateY(2px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--navy), #4b647f);
-      color: var(--white);
-      box-shadow: 0 12px 24px rgba(46, 63, 85, 0.24);
+      color: var(--yellow-soft);
+      background: var(--gray-dark);
+      border-color: var(--gray-dark);
     }
 
     .btn-secondary {
+      color: var(--gray-dark);
       background: rgba(255, 255, 255, 0.78);
-      color: var(--navy);
-      border: 1px solid var(--line);
+      border-color: rgba(95, 98, 104, 0.35);
     }
 
-    .note {
-      margin-top: 16px;
-      color: var(--sub);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .draw-card {
-      width: min(620px, 100%);
-      padding: 42px 24px;
+    .drawing-card {
+      width: min(520px, 100%);
+      padding: 34px 24px;
       text-align: center;
     }
 
-    .spinner-wrap {
-      width: 180px;
-      height: 180px;
+    .omikuji-box {
+      width: 160px;
+      height: 160px;
       margin: 0 auto 22px;
-      border-radius: 50%;
       display: grid;
       place-items: center;
+      border: 2px solid var(--gray-dark);
       background:
-        conic-gradient(from 90deg, var(--mint), var(--pink), var(--yellow), var(--lavender), var(--mint));
-      animation: spin 1.35s linear infinite;
-      box-shadow: 0 18px 40px rgba(46, 63, 85, 0.18);
+        repeating-linear-gradient(
+          45deg,
+          rgba(168, 214, 207, 0.34) 0,
+          rgba(168, 214, 207, 0.34) 8px,
+          transparent 8px,
+          transparent 16px
+        ),
+        rgba(255, 255, 255, 0.86);
+      animation: shake 0.58s ease-in-out infinite;
     }
 
-    .spinner-inner {
-      width: 126px;
-      height: 126px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255, 255, 255, 0.92);
-      color: var(--navy);
+    .omikuji-box span {
+      color: var(--gray-dark);
+      font-size: 28px;
       font-weight: 900;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       writing-mode: vertical-rl;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
+    @keyframes shake {
+      0%, 100% {
+        transform: rotate(-3deg);
+      }
+      50% {
+        transform: rotate(3deg);
       }
     }
 
-    .draw-title {
+    .drawing-card h2 {
       margin: 0;
-      color: var(--navy);
-      font-size: clamp(24px, 6vw, 36px);
-      letter-spacing: 0.06em;
+      color: var(--gray-dark);
+      font-size: clamp(22px, 6vw, 32px);
+      line-height: 1.35;
     }
 
-    .draw-text {
-      margin: 12px 0 0;
-      color: var(--sub);
-      font-weight: 700;
+    .drawing-card p {
+      margin: 10px 0 0;
+      color: var(--gray-dark);
+      font-weight: 800;
     }
 
     .result-card {
-      position: relative;
+      width: min(540px, 100%);
+      margin: 0 auto;
+      padding: clamp(12px, 4vw, 22px);
     }
 
-    .result-hero {
-      padding: clamp(24px, 6vw, 46px);
+    .result-inner {
+      padding: clamp(16px, 4.5vw, 26px);
+      border: 1.5px solid rgba(95, 98, 104, 0.25);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .result-header {
+      padding: 10px 12px;
+      background: var(--gray-dark);
+      color: var(--yellow-soft);
       text-align: center;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.5), transparent 35%),
-        linear-gradient(135deg, rgba(167, 221, 216, 0.72), rgba(245, 216, 223, 0.62));
-    }
-
-    .result-label {
-      display: inline-block;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.74);
-      color: var(--navy);
+      font-size: clamp(22px, 6.5vw, 30px);
       font-weight: 900;
-      font-size: 13px;
       letter-spacing: 0.08em;
     }
 
-    .scene-number {
-      margin: 20px 0 8px;
-      color: var(--navy);
-      font-size: clamp(18px, 5vw, 28px);
-      font-weight: 900;
-      letter-spacing: 0.15em;
-    }
-
-    .scene-name {
-      margin: 0;
-      color: var(--navy);
-      font-size: clamp(34px, 9vw, 64px);
-      line-height: 1.1;
-      letter-spacing: 0.08em;
-    }
-
-    .mind {
-      margin: 18px auto 0;
-      max-width: 640px;
-      padding: 16px 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--navy);
-      font-size: clamp(18px, 4.8vw, 24px);
-      font-weight: 900;
-    }
-
-    .result-body {
-      padding: clamp(22px, 5vw, 38px);
-    }
-
-    .book {
-      margin-top: 0;
-      padding: clamp(18px, 4vw, 28px);
-      border-radius: 28px;
+    .fortune-area {
+      padding: 22px 8px 18px;
+      text-align: center;
+      border-left: 1px solid rgba(95, 98, 104, 0.25);
+      border-right: 1px solid rgba(95, 98, 104, 0.25);
+      border-bottom: 1px solid rgba(95, 98, 104, 0.25);
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.88), rgba(255,255,255,0.68)),
-        linear-gradient(135deg, rgba(167, 221, 216, 0.34), rgba(246, 233, 168, 0.28));
-      border: 1px solid var(--line);
-      position: relative;
-      overflow: hidden;
+        radial-gradient(circle at 82% 10%, rgba(255, 248, 184, 0.9), transparent 22%),
+        linear-gradient(180deg, rgba(168, 214, 207, 0.35), rgba(255, 251, 220, 0.6));
     }
 
-    .book::before {
-      content: "Makeup Secret Book";
-      position: absolute;
-      right: -18px;
-      top: 18px;
-      transform: rotate(10deg);
-      color: rgba(46, 63, 85, 0.08);
-      font-size: clamp(38px, 8vw, 74px);
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    .book-title {
-      position: relative;
+    .fortune-label {
       margin: 0;
-      color: var(--navy);
-      font-size: clamp(24px, 6vw, 38px);
-      letter-spacing: 0.06em;
-      line-height: 1.2;
-    }
-
-    .book-subtitle {
-      position: relative;
-      margin: 6px 0 0;
-      color: var(--sub);
-      font-weight: 800;
-    }
-
-    .book-grid {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .book-item {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid var(--line);
-    }
-
-    .book-item.full {
-      grid-column: 1 / -1;
-    }
-
-    .book-item .label {
-      display: inline-block;
-      margin-bottom: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(167, 221, 216, 0.38);
-      color: var(--navy);
+      color: var(--gray-dark);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: 0.08em;
     }
 
-    .book-item h3 {
-      margin: 0 0 8px;
-      color: var(--navy);
+    .fortune-name {
+      margin: 4px 0 0;
+      color: var(--gray-dark);
+      font-size: clamp(52px, 17vw, 86px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .fortune-message {
+      margin: 10px auto 0;
+      max-width: 390px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      white-space: pre-line;
+      text-align: center;
+    }
+
+    .section {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(95, 98, 104, 0.18);
+      text-align: center;
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 0 0 10px;
+      color: var(--gray-dark);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    .section-title::before {
+      content: "★";
+      color: var(--mint-deep);
       font-size: 18px;
+    }
+
+    .main-text {
+      margin: 0;
+      color: var(--gray-dark);
+      text-align: center;
+      font-size: clamp(22px, 6.2vw, 30px);
+      font-weight: 900;
+      line-height: 1.35;
       letter-spacing: 0.03em;
     }
 
-    .book-item p {
-      margin: 0;
-      color: var(--sub);
-      font-weight: 700;
+    .body-text {
+      margin: 10px auto 0;
+      max-width: 410px;
+      color: var(--ink);
       font-size: 14px;
-    }
-
-    .message-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .message-box {
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid var(--line);
-    }
-
-    .message-box h2 {
-      margin: 0 0 8px;
-      color: var(--navy);
-      font-size: 18px;
-      letter-spacing: 0.04em;
-    }
-
-    .message-box p {
-      margin: 0;
-      color: var(--sub);
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .book-guide {
-      margin-top: 16px;
-      padding: 20px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(46, 63, 85, 0.94), rgba(75, 100, 127, 0.94));
-      color: var(--white);
-      text-align: center;
-    }
-
-    .book-guide h2 {
-      margin: 0 0 8px;
-      font-size: 22px;
-      letter-spacing: 0.06em;
-    }
-
-    .book-guide p {
-      margin: 0;
       font-weight: 800;
-    }
-
-    .result-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
-
-    .small-warning {
-      margin-top: 14px;
+      line-height: 1.9;
+      white-space: pre-line;
       text-align: center;
-      color: var(--sub);
-      font-size: 12px;
-      font-weight: 700;
     }
 
-    .venue-section {
-      padding: clamp(22px, 5vw, 36px);
-      border-top: 1px solid var(--line);
-    }
-
-    .venue-title {
-      margin: 0 0 14px;
-      color: var(--navy);
-      font-size: 22px;
-      letter-spacing: 0.04em;
-    }
-
-    .map-placeholder {
-      min-height: 260px;
-      border: 2px dashed rgba(46, 63, 85, 0.22);
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
+    .guide {
+      margin-top: 12px;
+      padding: 14px;
+      background: var(--gray-dark);
+      color: var(--yellow-soft);
       text-align: center;
-      background:
-        linear-gradient(90deg, rgba(46,63,85,0.05) 1px, transparent 1px),
-        linear-gradient(rgba(46,63,85,0.05) 1px, transparent 1px),
-        rgba(255, 255, 255, 0.54);
-      background-size: 24px 24px;
+      font-weight: 900;
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    .map-area {
+      margin-top: 18px;
       padding: 18px;
-      color: var(--sub);
+      border: 2px dashed rgba(95, 98, 104, 0.28);
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--gray-dark);
+      text-align: center;
       font-weight: 800;
     }
 
     .footer {
-      margin-top: 18px;
+      margin: 16px 0 0;
       text-align: center;
-      color: var(--sub);
+      color: var(--gray-dark);
       font-size: 12px;
       font-weight: 700;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 600px) {
       .screen {
-        padding: 18px 12px;
         align-items: start;
       }
 
-      .top-card {
-        padding: 24px 16px;
+      .beyond-mark {
+        font-size: clamp(44px, 15vw, 76px);
+        letter-spacing: 0.02em;
       }
 
-      .brand {
-        gap: 8px;
-      }
-
-      .concept-box,
-      .book-grid,
-      .message-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .book-item.full {
-        grid-column: auto;
-      }
-
-      .flow {
-        padding: 16px;
-      }
-
-      .result-body {
-        padding: 20px 14px;
-      }
-
-      .venue-section {
-        padding: 20px 14px;
+      .actions,
+      .result-actions {
+        flex-direction: column;
       }
 
       .btn {
         width: 100%;
       }
 
-      .result-actions .btn {
-        width: 100%;
+      .result-card {
+        padding: 10px;
+      }
+
+      .result-inner {
+        padding: 14px;
+      }
+
+      .body-text {
+        font-size: 13px;
       }
     }
   </style>
 </head>
 <body>
   <section class="screen active" id="startScreen">
-    <div class="container">
-      <div class="card top-card">
-        <div class="brand" aria-label="Beyond × ちふれ">
-          <span class="logo-text">CHIFURE</span>
-          <span class="cross">×</span>
-          <span class="logo-text">Beyond</span>
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="brand">
+          <span>ちふれ</span>
+          <span class="x">×</span>
+          <span>文化服装学院</span>
         </div>
 
-        <span class="pill">文化服装学院 ファッションショー</span>
-        <h1>文化マインド<br />おみくじ</h1>
-        <p class="lead">
-          あなたの“好き”と響き合う、Beyondのシーンを占います。<br />
-          結果画面には、そのシーンのミニメイク秘話BOOKが表示されます。
+        <div class="beyond-mark" aria-label="Be⇒yond">Be⇒yond</div>
+
+        <h1 class="omikuji-name">おみくじ</h1>
+
+        <p class="hero-subtitle">
+          あなたの今日の運勢と、Be⇒yondのラッキーシーンを占います。<br />
+          ショーの前でも、見終わった後でも楽しめるWebおみくじです。
         </p>
-
-        <div class="concept-box" aria-label="このおみくじで大切にしていること">
-          <div class="concept">
-            <strong>自分の好きを見つける</strong>
-            <span>ちふれの商品をきっかけに、自分の好きな部分を思い出す。</span>
-          </div>
-          <div class="concept">
-            <strong>文化マインドに触れる</strong>
-            <span>似合うかより、好きか。自分の納得できるところを大切に。</span>
-          </div>
-          <div class="concept">
-            <strong>秘話を読む</strong>
-            <span>出てきたシーンのメイクに込められた想いを知る。</span>
-          </div>
-        </div>
-
-        <div class="flow">
-          <p class="flow-title">体験の流れ</p>
-          <ol>
-            <li>自分の好きだと思える部分を考える</li>
-            <li>ちふれの商品を選び、紙に好きなポイントを書く</li>
-            <li>ボードに紙を貼ったら、おみくじを引く</li>
-            <li>結果画面のミニメイク秘話BOOKを読む</li>
-            <li>もっと知りたい人は、スタッフから紙BOOKを受け取る</li>
-          </ol>
-        </div>
 
         <div class="actions">
           <button class="btn btn-primary" type="button" id="drawButton">おみくじを引く</button>
           <button class="btn btn-secondary" type="button" id="mapButton">会場案内を見る</button>
         </div>
-
-        <p class="note">
-          ※ボードに紙を貼り終わった方からおみくじを引けます。
-        </p>
       </div>
 
-      <div class="footer">
-        © Beyond × CHIFURE Booth
-      </div>
+      <div class="footer">ちふれ × 文化服装学院</div>
     </div>
   </section>
 
   <section class="screen" id="drawingScreen">
-    <div class="draw-card card">
-      <div class="spinner-wrap" aria-hidden="true">
-        <div class="spinner-inner">抽選中</div>
+    <div class="drawing-card">
+      <div class="omikuji-box" aria-hidden="true">
+        <span>おみくじ</span>
       </div>
-      <h2 class="draw-title">あなたの文化マインドと<br />響き合うシーンを探しています</h2>
-      <p class="draw-text">ミニメイク秘話BOOKを準備中...</p>
+      <h2>Be⇒yondマインドを<br />読み取り中...</h2>
+      <p>今日の運勢とラッキーシーンを占っています</p>
+    </div>
+  </section>
+
+  <section class="screen" id="mapScreen">
+    <div class="wrap">
+      <div class="result-card">
+        <div class="result-inner">
+          <div class="result-header">会場案内図</div>
+
+          <div class="map-area" id="venueMapOnly">
+            <strong>会場案内図エリア</strong><br />
+            実際の会場案内図画像がある場合は、ここを画像に差し替えます。<br />
+            例：受付 / ちふれブース / ショー会場 / トイレ / 休憩スペース
+          </div>
+
+          <div class="result-actions">
+            <button class="btn btn-secondary" type="button" id="mapBackButton">最初の画面に戻る</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">ちふれ × 文化服装学院</div>
     </div>
   </section>
 
   <section class="screen" id="resultScreen">
-    <div class="container">
-      <div class="card result-card">
-        <div class="result-hero">
-          <span class="result-label">あなたと響き合うシーンは...</span>
-          <p class="scene-number" id="sceneNumber">Scene 01</p>
-          <h2 class="scene-name" id="sceneName">Bloom</h2>
-          <div class="mind" id="mindText">
-            “好き”を信じて一歩踏み出す力
-          </div>
-        </div>
+    <div class="wrap">
+      <div class="result-card">
+        <div class="result-inner">
+          <div class="result-header">Be⇒yondおみくじ</div>
 
-        <div class="result-body">
-          <section class="book" aria-label="ミニメイク秘話BOOK">
-            <h2 class="book-title" id="miniBookTitle">Mini Makeup Secret Book</h2>
-            <p class="book-subtitle" id="miniBookSubTitle">
-              このシーンのメイクに込められた想い
+          <div class="fortune-area">
+            <p class="fortune-label">本日の運勢</p>
+            <h2 class="fortune-name" id="fortuneName">中吉</h2>
+            <p class="fortune-message" id="fortuneMessage">
+              自分らしさを大切に。
+              無理に飾らなくても、あなたの個性は十分に輝いている。
             </p>
+          </div>
 
-            <div class="book-grid">
-              <div class="book-item">
-                <span class="label">01 THEME</span>
-                <h3>メイクテーマ</h3>
-                <p id="makeupTheme">はじまりの透明感</p>
-              </div>
-
-              <div class="book-item">
-                <span class="label">02 POINT</span>
-                <h3>注目ポイント</h3>
-                <p id="makeupPoint">肌の質感、やわらかな色の重なり、表情の変化。</p>
-              </div>
-
-              <div class="book-item full">
-                <span class="label">03 SECRET</span>
-                <h3>メイク秘話</h3>
-                <p id="makeupSecret">
-                  このシーンでは、まだ言葉になる前の“好き”が少しずつ形になっていく瞬間を表現しています。
-                </p>
-              </div>
-
-              <div class="book-item full">
-                <span class="label">04 CHIFURE × BUNKA</span>
-                <h3>ちふれとのつながり</h3>
-                <p id="chifureLink">
-                  ちふれの商品を通して、自分の肌や表情に向き合い、自分の好きな部分を思い出すきっかけにしています。
-                </p>
-              </div>
-            </div>
+          <section class="section">
+            <h3 class="section-title">ラッキーシーン</h3>
+            <p class="main-text" id="sceneName">LiMiNeRA</p>
+            <p class="body-text" id="sceneDescription">
+              可愛いを守りながら、曖昧で未完成さを表現する。
+              夢と日常の間を揺れる女の子をイメージしたシーン。
+            </p>
           </section>
 
-          <div class="message-grid">
-            <div class="message-box">
-              <h2>これからショーを見る人へ</h2>
-              <p id="beforeMessage">
-                ショーの中で、このシーンを探してみてください。メイク秘話を知ると、見え方が少し変わるかも。
-              </p>
-            </div>
-            <div class="message-box">
-              <h2>ショーを見た後の人へ</h2>
-              <p id="afterMessage">
-                印象に残った場面を思い返しながら読んでみてください。もう一度、シーンの意味が深く感じられるかも。
-              </p>
-            </div>
-          </div>
-
-          <div class="book-guide">
-            <h2 id="bookGuideTitle">もっと詳しく知りたい方へ</h2>
-            <p id="bookGuideText">
-              この画面をスタッフに見せると、該当シーンの紙BOOKを受け取れます。
+          <section class="section">
+            <h3 class="section-title">見習うべし！文化マインド！</h3>
+            <p class="main-text" id="mindTitle">みんな違ってみんないい</p>
+            <p class="body-text" id="mindText">
+              違っているところこそ、あなただけの魅力。
+              自分の“違い”を、もっと愛して、もっと面白がっちゃおう。
             </p>
+          </section>
+
+          <section class="section">
+            <h3 class="section-title">文化豆知識</h3>
+            <p class="main-text" id="triviaTitle">入学式・卒業式は和装禁止！？</p>
+            <p class="body-text" id="triviaText">
+              理由は噂を聞くと、ファッション“洋服”を学ぶ学校だから和装は禁止だ。
+            </p>
+          </section>
+
+          <div class="guide" id="sceneGuide">
+            ラッキーシーンを、ショーの中で探したり、
+            見終わった後に思い返したりして楽しんでください。
           </div>
 
           <div class="result-actions">
@@ -719,165 +551,283 @@
             <button class="btn btn-secondary" type="button" id="backButton">最初の画面に戻る</button>
           </div>
 
-          <p class="small-warning">
-            ※紙BOOKの受け取りがある場合は、結果画面をスタッフに見せてから閉じてください。
-          </p>
-        </div>
-
-        <div class="venue-section" id="venueMap">
-          <h2 class="venue-title">会場案内</h2>
-          <div class="map-placeholder">
-            <div>
-              <strong>ここに会場案内図を入れます</strong><br />
-              実際の案内図画像がある場合は、この枠を画像に差し替えます。<br />
-              例：受付 / ちふれブース / ファッションショー会場 / トイレ / 休憩スペース
-            </div>
+          <div class="map-area" id="venueMap">
+            <strong>会場案内図エリア</strong><br />
+            実際の会場案内図画像がある場合は、ここを画像に差し替えます。<br />
+            例：受付 / ちふれブース / ショー会場 / トイレ / 休憩スペース
           </div>
         </div>
       </div>
 
-      <div class="footer">
-        Beyond × CHIFURE Booth
-      </div>
+      <div class="footer">ちふれ × 文化服装学院</div>
     </div>
   </section>
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
+      const fortunes = [
+        {
+          name: "大吉",
+          weight: 10,
+          message: "今日は最高の1日！なんでも挑戦しちゃおう！！"
+        },
+        {
+          name: "吉",
+          weight: 20,
+          message: "普段選ばない色や言葉に、今日のヒントが隠れているかも！"
+        },
+        {
+          name: "中吉",
+          weight: 50,
+          message: "自分らしさを大切に。無理に飾らなくても、あなたの個性は十分に輝いている。"
+        },
+        {
+          name: "小吉",
+          weight: 15,
+          message: "新しいインスピレーションが生まれる日。"
+        },
+        {
+          name: "末吉",
+          weight: 5,
+          message: "今日という日があなたステージになりますように。"
+        }
+      ];
+
       const scenes = [
         {
-          number: "Scene 01",
-          name: "Bloom",
-          mind: "“好き”を信じて一歩踏み出す力",
-          theme: "はじまりの透明感",
-          point: "肌の質感、やわらかな色の重なり、表情の変化。",
-          secret: "このシーンでは、まだ言葉になる前の“好き”が少しずつ形になっていく瞬間を表現しています。メイクは主張しすぎず、モデル自身の表情や肌の空気感が引き立つように仕上げています。",
-          chifure: "ちふれの商品を通して、自分の肌や表情に向き合い、自分の好きな部分を思い出すきっかけにしています。",
-          before: "ショーの中で、心がふわっと開くような瞬間を探してみてください。メイク秘話を知ると、表情の見え方が少し変わるかも。",
-          after: "見終わった後は、最初に心が動いた瞬間を思い返してみてください。自分の“好き”が動き出す感覚に近いシーンだったかもしれません。"
+          name: "UNCANNY",
+          description: "囚われた美への違和感と、どこか不気味な世界観を表現したシーン。"
         },
         {
-          number: "Scene 02",
-          name: "Contrast",
-          mind: "違いを楽しみ、自分らしさに変える力",
-          theme: "違いが混ざる美しさ",
-          point: "色のコントラスト、衣装とメイクのバランス、モデルごとの個性。",
-          secret: "正反対に見える色や質感をあえて組み合わせることで、“違うからこそ可愛い”という文化マインドを表現しています。メイクは衣装に合わせるだけではなく、モデルの個性が立ち上がるように調整しています。",
-          chifure: "ちふれの色や質感を選ぶ体験が、自分の好きな部分を見つける入り口になるように意識しています。",
-          before: "ショーの中で、違うもの同士が混ざって魅力になる瞬間を探してみてください。",
-          after: "印象に残った色や形の組み合わせを思い返してみてください。違いを受け止める文化マインドが見えてくるかも。"
+          name: "NOIR CODE",
+          description: "黒という共通の色を通して、それぞれが持つ自分だけのコード（個性・価値観・生き方）を表現するシーン。"
         },
         {
-          number: "Scene 03",
-          name: "Edge",
-          mind: "物怖じせず、自分の好きを貫く力",
-          theme: "強さの中にあるやわらかさ",
-          point: "強い目線、ラインの効いたメイク、堂々とした歩き方。",
-          secret: "このシーンでは、“好き”を貫く強さを表現しています。ただ強く見せるだけではなく、肌の質感や色のなじませ方で、内側にある繊細さも残しています。",
-          chifure: "メイクを通して、自分の印象を自分で選ぶ楽しさを伝えたいという想いを込めています。",
-          before: "ショーの中で、思わず目で追いたくなる強さを探してみてください。",
-          after: "強く印象に残ったモデルや表情を思い返してみてください。その裏側にあるメイクの意図を深掘りできます。"
+          name: "calm",
+          description: "静けさと冷たさを感じるシーン。NTカラーを多く用い、主張しすぎない落ち着きの甘美表現。"
         },
         {
-          number: "Scene 04",
-          name: "Layer",
-          mind: "積み重ねた想いを、自分の表現にする力",
-          theme: "重ねることで生まれる奥行き",
-          point: "重なる素材、色の奥行き、メイクの質感の変化。",
-          secret: "文化生がショーを作るまでに重ねてきた時間や試行錯誤を、色や質感のレイヤーで表現しています。近くで見たくなるような細かいニュアンスを大切にしました。",
-          chifure: "スキンケアやメイクの積み重ねが、表現の土台になることを意識しています。",
-          before: "ショーの中で、近くで見たくなるような細かいこだわりを探してみてください。",
-          after: "もう一度見たいと思ったディテールを思い返してみてください。準備の過程や想いがより伝わるかも。"
+          name: "LiMiNeRA",
+          description: "可愛いを守りながら、曖昧で未完成さを表現する。夢と日常の間を揺れる女の子をイメージしたシーン。"
         },
         {
-          number: "Scene 05",
-          name: "Free",
-          mind: "正解を決めつけず、自分の納得を大切にする力",
-          theme: "自分にとっての正解",
-          point: "自由な色使い、予想外の組み合わせ、自然な表情。",
-          secret: "このシーンでは、“似合うかどうか”よりも“好きかどうか”を大切にしています。メイクも決まった正解に寄せるのではなく、その人が納得できる表現を目指しています。",
-          chifure: "ちふれの商品を選ぶ体験が、自分の好きな色や質感を肯定するきっかけになるようにしています。",
-          before: "ショーの中で、“こうじゃなきゃ”を超える自由な表現を探してみてください。",
-          after: "自分の中で一番好きだった表現を思い返してみてください。それがあなたにとっての正解かもしれません。"
+          name: "Douce Rebelle",
+          description: "柔らかく甘美なのに、芯は反骨的。優雅なのに、誰にも媚びないシーン。"
+        }
+      ];
+
+      const minds = [
+        {
+          title: "他人を受け止める",
+          text: "自分と違う考えや表現も、まずは受け止めてみる。違いを否定しないところから、新しい可愛いが見えてくる。"
         },
         {
-          number: "Scene 06",
-          name: "Together",
-          mind: "みんな違って、みんないいと受け止める力",
-          theme: "個性が集まる一体感",
-          point: "モデル同士の空気感、全体の一体感、それぞれの個性。",
-          secret: "一人ひとりの違いを消さずに、全体としてひとつの空気を作ることを大切にしています。メイクは全員を同じにするためではなく、それぞれの個性が並んだときに響き合うように設計しています。",
-          chifure: "自分の好きな部分を持ち寄ることで、ブース全体のボードも一つの共創作品になるという意味を込めています。",
-          before: "ショーの中で、一人ひとりの違いが集まって大きな魅力になる瞬間を探してみてください。",
-          after: "最後に残った空気感や余韻を思い返してみてください。Beyond全体に込められた共創の意味が見えてくるかも。"
+          title: "全部可愛い",
+          text: "きれい、変、強い、甘い、未完成。どんな表現にも“可愛い”はある。まずは全部を面白がってみよう。"
+        },
+        {
+          title: "似合うかどうか＜好きかどうか",
+          text: "似合うかを気にしすぎるより、自分が好きと思えるかどうかが大切。好きという気持ちが一番のスタート。"
+        },
+        {
+          title: "自分の納得できるところが正解で一番大切",
+          text: "誰かの正解に合わせるだけじゃなく、自分が納得できる表現を選ぶ。その感覚があなたらしさになる。"
+        },
+        {
+          title: "個性を尊重",
+          text: "みんな同じじゃなくていい。一人ひとりの違いがあるから、表現はもっと広がって面白くなる。"
+        },
+        {
+          title: "自分の好きを貫く",
+          text: "周りに流されすぎず、自分の中にある“これが好き”を大切にする。その強さが表現の芯になる。"
+        },
+        {
+          title: "ファッションに対して熱狂的",
+          text: "好きな服、好きな色、好きな世界観に本気で向き合う。熱量がある人の表現は、やっぱり強い。"
+        },
+        {
+          title: "物怖じしない",
+          text: "少し変かも、派手かも、浮くかも。そう思っても一歩出してみる勇気が、あなたの魅力を広げてくれる。"
+        },
+        {
+          title: "やるときやる、メリハリがち",
+          text: "楽しむときは全力で楽しむ。やるときは本気でやる。そのメリハリが文化らしいかっこよさ。"
+        },
+        {
+          title: "みんな違ってみんないい",
+          text: "違っているところこそ、あなただけの魅力。自分の“違い”を、もっと愛して、もっと面白がっちゃおう。"
+        }
+      ];
+
+      const trivias = [
+        {
+          title: "入学式・卒業式は和装禁止！？",
+          text: "理由は噂を聞くと、ファッション“洋服”を学ぶ学校だから和装は禁止だ。"
+        },
+        {
+          title: "1年生前期は派手服多め！？",
+          text: "1年生の前期は派手な服装が多いけど、後期になると慣れてだんだん派手じゃなくなる。"
+        },
+        {
+          title: "朝のエレベーターは激混み",
+          text: "朝の時間帯はエレベーターがかなり混みがち。余裕を持って動くのが文化生の知恵。"
+        },
+        {
+          title: "食堂は毎日激混み",
+          text: "食堂は毎日混みがち。タイミングを見て行くのが大事だ。"
+        },
+        {
+          title: "裁縫道具は借りがち",
+          text: "服装科の裁縫道具は借りがち・無くしがち。名前を書いておくのがめちゃ大事だ。"
+        },
+        {
+          title: "新宿だからモード学園に間違われがち",
+          text: "学校が新宿にあるから、よくモード学園と間違われがちだ。"
+        },
+        {
+          title: "服装科は留学生が多い",
+          text: "留学生がいるから、自然といろんな文化や価値観に触れられる。"
+        },
+        {
+          title: "1年生は派手すぎてすぐわかる",
+          text: "入学したての1年生はファッションが派手で、パッと見でわかりがちだ。"
+        },
+        {
+          title: "9月ぐらいから中庭が静かに！？",
+          text: "9月ぐらいになると、中庭にいる人数が少なくなる。季節と課題のリアルを感じる豆知識だ。"
+        },
+        {
+          title: "先生との距離が近い",
+          text: "先生との距離が近く、家族ぐるみになるくらい関係が深くなることもある。"
+        },
+        {
+          title: "意外とスポーツ抜群",
+          text: "ファッションだけじゃなく、意外とスポーツが得意な人も多い。"
+        },
+        {
+          title: "好きがすぐわかる",
+          text: "一人ひとりの個性が出ていて、何が好きかすぐわかるのも文化らしさだ。"
+        },
+        {
+          title: "2年次のプロモーションコースはみんなMacBook",
+          text: "2年次のプロモーションコースはMacBook率が高い。作るものも見せ方もデジタル寄りだ。"
+        },
+        {
+          title: "いろんな言語を単語で覚えられる",
+          text: "留学生がいるから、いろんな言語を単語で覚えられる。国際感ある日常があるのも魅力だ。"
+        },
+        {
+          title: "1年次の流通科でも服を作る機会あり",
+          text: "1年次の流通科でも最初はパンツ・シャツ・スカートを作る機会がある。"
+        },
+        {
+          title: "1年次の流通科はプレゼンが多い",
+          text: "1年次の流通科はプレゼンテーションが多く、人前に立つことに自信を持てるようになり、学年が上がるほどプレゼン力が上達する。"
         }
       ];
 
       const startScreen = document.getElementById("startScreen");
       const drawingScreen = document.getElementById("drawingScreen");
+      const mapScreen = document.getElementById("mapScreen");
       const resultScreen = document.getElementById("resultScreen");
 
       const drawButton = document.getElementById("drawButton");
       const mapButton = document.getElementById("mapButton");
+      const mapBackButton = document.getElementById("mapBackButton");
       const showMapFromResultButton = document.getElementById("showMapFromResultButton");
       const backButton = document.getElementById("backButton");
 
-      const sceneNumber = document.getElementById("sceneNumber");
+      const fortuneName = document.getElementById("fortuneName");
+      const fortuneMessage = document.getElementById("fortuneMessage");
       const sceneName = document.getElementById("sceneName");
+      const sceneDescription = document.getElementById("sceneDescription");
+      const mindTitle = document.getElementById("mindTitle");
       const mindText = document.getElementById("mindText");
-      const miniBookSubTitle = document.getElementById("miniBookSubTitle");
-      const makeupTheme = document.getElementById("makeupTheme");
-      const makeupPoint = document.getElementById("makeupPoint");
-      const makeupSecret = document.getElementById("makeupSecret");
-      const chifureLink = document.getElementById("chifureLink");
-      const beforeMessage = document.getElementById("beforeMessage");
-      const afterMessage = document.getElementById("afterMessage");
-      const bookGuideText = document.getElementById("bookGuideText");
+      const triviaTitle = document.getElementById("triviaTitle");
+      const triviaText = document.getElementById("triviaText");
+      const sceneGuide = document.getElementById("sceneGuide");
 
       function showScreen(screen) {
-        startScreen.classList.remove("active");
-        drawingScreen.classList.remove("active");
-        resultScreen.classList.remove("active");
+        document.querySelectorAll(".screen").forEach(function (item) {
+          item.classList.remove("active");
+        });
         screen.classList.add("active");
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      function pickScene() {
-        const index = Math.floor(Math.random() * scenes.length);
-        return scenes[index];
+      function formatText(text) {
+        return text
+          .replace(/。/g, "。\n")
+          .replace(/！/g, "！\n")
+          .replace(/？/g, "？\n")
+          .trim();
       }
 
-      function setResult(scene) {
-        sceneNumber.textContent = scene.number;
+      function pickRandom(list) {
+        const index = Math.floor(Math.random() * list.length);
+        return list[index];
+      }
+
+      function pickWeighted(list) {
+        const totalWeight = list.reduce(function (sum, item) {
+          return sum + item.weight;
+        }, 0);
+
+        let random = Math.random() * totalWeight;
+
+        for (const item of list) {
+          random -= item.weight;
+          if (random <= 0) {
+            return item;
+          }
+        }
+
+        return list[list.length - 1];
+      }
+
+      function setResult(fortune, scene, mind, trivia) {
+        fortuneName.textContent = fortune.name;
+        fortuneMessage.textContent = formatText(fortune.message);
+
         sceneName.textContent = scene.name;
-        mindText.textContent = scene.mind;
-        miniBookSubTitle.textContent = scene.number + "「" + scene.name + "」のメイクに込められた想い";
-        makeupTheme.textContent = scene.theme;
-        makeupPoint.textContent = scene.point;
-        makeupSecret.textContent = scene.secret;
-        chifureLink.textContent = scene.chifure;
-        beforeMessage.textContent = scene.before;
-        afterMessage.textContent = scene.after;
-        bookGuideText.textContent = "この画面をスタッフに見せると、" + scene.number + "「" + scene.name + "」の紙BOOKを受け取れます。";
+        sceneDescription.textContent = formatText(scene.description);
+
+        mindTitle.textContent = mind.title;
+        mindText.textContent = formatText(mind.text);
+
+        triviaTitle.textContent = trivia.title;
+        triviaText.textContent = formatText(trivia.text);
+
+        sceneGuide.textContent = formatText("ラッキーシーンは「" + scene.name + "」。ショーの中で探したり、見終わった後に思い返したりして楽しんでください。");
       }
 
       drawButton.addEventListener("click", function () {
         showScreen(drawingScreen);
 
         setTimeout(function () {
-          const scene = pickScene();
-          setResult(scene);
+          const fortune = pickWeighted(fortunes);
+          const scene = pickRandom(scenes);
+          const mind = pickRandom(minds);
+          const trivia = pickRandom(trivias);
+
+          setResult(fortune, scene, mind, trivia);
           showScreen(resultScreen);
-        }, 1800);
+        }, 1200);
       });
 
       mapButton.addEventListener("click", function () {
-        showScreen(resultScreen);
-        document.getElementById("venueMap").scrollIntoView({ behavior: "smooth", block: "start" });
+        showScreen(mapScreen);
+      });
+
+      mapBackButton.addEventListener("click", function () {
+        showScreen(startScreen);
       });
 
       showMapFromResultButton.addEventListener("click", function () {
-        document.getElementById("venueMap").scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById("venueMap").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
       });
 
       backButton.addEventListener("click", function () {
