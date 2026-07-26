@@ -513,32 +513,6 @@
       font-weight: 800;
     }
 
-    .experience-flow {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      align-items: center;
-      gap: 7px;
-      margin: 20px 0;
-    }
-
-    .flow-step {
-      min-height: 70px;
-      display: grid;
-      place-items: center;
-      padding: 10px 8px;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(95, 98, 104, 0.16);
-      color: var(--gray-dark);
-      font-size: 12px;
-      line-height: 1.55;
-      font-weight: 900;
-    }
-
-    .flow-arrow {
-      color: var(--mint-deep);
-      font-size: 21px;
-      font-weight: 900;
-    }
 
     .booth-detail {
       margin: 0 auto;
@@ -576,6 +550,18 @@
       object-fit: contain;
     }
 
+    .map-explanation {
+      margin: 0 0 14px;
+      padding: 14px 16px;
+      border: 1.5px solid rgba(141, 200, 194, 0.45);
+      background: linear-gradient(145deg, rgba(168, 214, 207, 0.16), rgba(255, 248, 184, 0.18));
+      color: var(--gray-dark);
+      font-size: 14px;
+      line-height: 1.9;
+      font-weight: 800;
+      text-align: center;
+    }
+
     .footer {
       margin: 16px 0 0;
       text-align: center;
@@ -600,19 +586,6 @@
         flex-direction: column;
       }
 
-      .experience-flow {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .flow-step {
-        min-height: 0;
-      }
-
-      .flow-arrow {
-        transform: rotate(90deg);
-        line-height: 1;
-      }
 
       .btn {
         width: 100%;
@@ -694,6 +667,10 @@
           <div class="result-header">会場案内図</div>
 
           <div class="map-area" id="venueMapOnly">
+            <p class="map-explanation">
+              大ホールから左に進むと階段があります。<br />
+              その階段を降りた1階が、このマップのフロアです。
+            </p>
             <img class="venue-map-image" src="venue-map.png" alt="Be⇒yond会場案内図" />
           </div>
 
@@ -756,7 +733,7 @@
           <section class="booth-invitation" aria-labelledby="boothInvitationTitle">
             <p class="booth-eyebrow">ちふれブースに行く前に</p>
             <h3 class="booth-title" id="boothInvitationTitle">
-              あなたの「好き」を考えてみよう！
+              あなたの「好き」を<br />考えてみよう！
             </h3>
 
             <p class="booth-question">
@@ -778,14 +755,6 @@
               自分の好きなところを考えてみて！
             </p>
 
-            <div class="experience-flow" aria-label="体験の流れ">
-              <div class="flow-step">おみくじで<br />問いかけ</div>
-              <div class="flow-arrow" aria-hidden="true">→</div>
-              <div class="flow-step">ショー前・観ている間に<br />考える</div>
-              <div class="flow-arrow" aria-hidden="true">→</div>
-              <div class="flow-step">ブースで選び、<br />言葉にする</div>
-            </div>
-
             <p class="booth-detail">
               図書館横のちふれブースで、選んだパーツのBOXから
               スキンケアやコスメをGETしよう！
@@ -802,6 +771,10 @@
           </div>
 
           <div class="map-area" id="venueMap">
+            <p class="map-explanation">
+              大ホールから左に進むと階段があります。<br />
+              その階段を降りた1階が、このマップのフロアです。
+            </p>
             <img class="venue-map-image" src="venue-map.png" alt="Be⇒yond会場案内図" />
           </div>
         </div>
