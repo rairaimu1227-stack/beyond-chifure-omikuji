@@ -75,46 +75,11 @@
 
     .hero-card,
     .drawing-card,
-    .result-card,
-    .locked-card {
+    .result-card {
       background: var(--paper);
       border: 1.5px solid var(--line);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-    }
-
-    .locked-card {
-      width: min(560px, 100%);
-      padding: clamp(28px, 7vw, 48px);
-      text-align: center;
-    }
-
-    .locked-title {
-      margin: 0;
-      color: var(--gray-dark);
-      font-size: clamp(28px, 8vw, 46px);
-      line-height: 1.3;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-    }
-
-    .locked-text {
-      margin: 18px auto 0;
-      max-width: 420px;
-      color: var(--ink);
-      font-size: 15px;
-      font-weight: 800;
-      line-height: 1.9;
-    }
-
-    .locked-date {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 10px 16px;
-      color: var(--yellow-soft);
-      background: var(--gray-dark);
-      font-weight: 900;
-      letter-spacing: 0.06em;
     }
 
     .hero-card {
@@ -607,21 +572,6 @@
   </style>
 </head>
 <body>
-  <section class="screen" id="lockedScreen">
-    <div class="wrap">
-      <div class="locked-card">
-        <h1 class="locked-title">Be⇒yondおみくじは<br />現在利用できません</h1>
-        <p class="locked-text">
-          本サイトの公開期間は終了しました。<br />
-          ご参加いただき、ありがとうございました。
-        </p>
-        <div class="locked-date">公開期間：2026.07.26〜2026.08.01</div>
-      </div>
-
-      <div class="footer">ちふれ × 文化服装学院</div>
-    </div>
-  </section>
-
   <section class="screen" id="startScreen">
     <div class="wrap">
       <div class="hero-card">
@@ -786,33 +736,6 @@
 
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      const RELEASE_START_DATE_JST = "2026-07-26";
-      const RELEASE_END_DATE_JST = "2026-08-01";
-
-      function getTodayInJapan() {
-        const parts = new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Tokyo",
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit"
-        }).formatToParts(new Date());
-
-        const values = {};
-        parts.forEach(function (part) {
-          if (part.type !== "literal") {
-            values[part.type] = part.value;
-          }
-        });
-
-        return values.year + "-" + values.month + "-" + values.day;
-      }
-
-      function isWithinReleasePeriod() {
-        const today = getTodayInJapan();
-        return today >= RELEASE_START_DATE_JST &&
-               today <= RELEASE_END_DATE_JST;
-      }
-
       const fortunes = [
         {
           name: "大吉",
@@ -974,7 +897,6 @@
         }
       ];
 
-      const lockedScreen = document.getElementById("lockedScreen");
       const startScreen = document.getElementById("startScreen");
       const drawingScreen = document.getElementById("drawingScreen");
       const mapScreen = document.getElementById("mapScreen");
@@ -1004,11 +926,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      if (!isWithinReleasePeriod()) {
-        showScreen(lockedScreen);
-        return;
-      }
-
+      // 公開期間の制限なく、常におみくじを利用できます。
       showScreen(startScreen);
 
       function formatText(text) {
