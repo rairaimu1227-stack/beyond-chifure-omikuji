@@ -395,138 +395,6 @@
       white-space: pre-line;
     }
 
-    .booth-invitation {
-      position: relative;
-      overflow: hidden;
-      margin-top: 18px;
-      padding: 24px 18px;
-      border: 2px solid rgba(141, 200, 194, 0.68);
-      background:
-        radial-gradient(circle at 92% 10%, rgba(255, 248, 184, 0.92), transparent 25%),
-        linear-gradient(145deg, rgba(168, 214, 207, 0.32), rgba(255, 251, 220, 0.9));
-      text-align: center;
-    }
-
-    .booth-invitation::before,
-    .booth-invitation::after {
-      content: "✦";
-      position: absolute;
-      color: rgba(141, 200, 194, 0.62);
-      font-size: 30px;
-      line-height: 1;
-    }
-
-    .booth-invitation::before {
-      top: 12px;
-      left: 14px;
-    }
-
-    .booth-invitation::after {
-      right: 14px;
-      bottom: 12px;
-    }
-
-    .booth-eyebrow {
-      margin: 0;
-      color: var(--mint-deep);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-    }
-
-    .booth-title {
-      margin: 6px 0 0;
-      color: var(--gray-dark);
-      font-size: clamp(21px, 6vw, 29px);
-      line-height: 1.45;
-      font-weight: 900;
-    }
-
-    .booth-question {
-      margin: 16px auto 0;
-      max-width: 430px;
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.9;
-      font-weight: 900;
-    }
-
-    .part-list {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin: 15px auto;
-    }
-
-    .part-chip {
-      min-width: 50px;
-      padding: 7px 11px;
-      border: 1.5px solid rgba(95, 98, 104, 0.2);
-      background: rgba(255, 255, 255, 0.78);
-      color: var(--gray-dark);
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .booth-prompt {
-      margin: 0 auto;
-      max-width: 420px;
-      color: var(--gray-dark);
-      font-size: 14px;
-      line-height: 1.85;
-      font-weight: 800;
-    }
-
-
-    .booth-detail {
-      margin: 0 auto;
-      max-width: 440px;
-      padding: 15px 14px;
-      background: var(--gray-dark);
-      color: var(--yellow-soft);
-      font-size: 14px;
-      line-height: 1.9;
-      font-weight: 900;
-    }
-
-    .booth-theme {
-      display: block;
-      margin-top: 7px;
-      color: var(--yellow);
-    }
-
-    .map-area {
-      margin-top: 18px;
-      padding: 10px;
-      border: 1.5px solid rgba(95, 98, 104, 0.22);
-      background: rgba(255, 255, 255, 0.82);
-      color: var(--gray-dark);
-      text-align: center;
-      font-weight: 800;
-      overflow: hidden;
-    }
-
-    .venue-map-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
-      object-fit: contain;
-    }
-
-    .map-explanation {
-      margin: 0 0 14px;
-      padding: 14px 16px;
-      border: 1.5px solid rgba(141, 200, 194, 0.45);
-      background: linear-gradient(145deg, rgba(168, 214, 207, 0.16), rgba(255, 248, 184, 0.18));
-      color: var(--gray-dark);
-      font-size: 14px;
-      line-height: 1.9;
-      font-weight: 800;
-      text-align: center;
-    }
-
     .footer {
       margin: 16px 0 0;
       text-align: center;
@@ -592,7 +460,6 @@
 
         <div class="actions">
           <button class="btn btn-primary" type="button" id="drawButton">おみくじを引く</button>
-          <button class="btn btn-secondary" type="button" id="mapButton">会場案内を見る</button>
         </div>
       </div>
 
@@ -607,30 +474,6 @@
       </div>
       <h2>Be⇒yondマインドを<br />読み取り中...</h2>
       <p>今日の運勢とラッキーシーンを占っています</p>
-    </div>
-  </section>
-
-  <section class="screen" id="mapScreen">
-    <div class="wrap">
-      <div class="result-card">
-        <div class="result-inner">
-          <div class="result-header">会場案内図</div>
-
-          <div class="map-area" id="venueMapOnly">
-            <p class="map-explanation">
-              大ホールから左に進むと階段があります。<br />
-              その階段を降りた1階が、このマップのフロアです。
-            </p>
-            <img class="venue-map-image" src="venue-map.png" alt="Be⇒yond会場案内図" />
-          </div>
-
-          <div class="result-actions">
-            <button class="btn btn-secondary" type="button" id="mapBackButton">最初の画面に戻る</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer">ちふれ × 文化服装学院</div>
     </div>
   </section>
 
@@ -680,52 +523,8 @@
             見終わった後に思い返したりして楽しんでください。
           </div>
 
-          <section class="booth-invitation" aria-labelledby="boothInvitationTitle">
-            <p class="booth-eyebrow">ちふれブースに行く前に</p>
-            <h3 class="booth-title" id="boothInvitationTitle">
-              あなたの「好き」を<br />考えてみよう！
-            </h3>
-
-            <p class="booth-question">
-              あなたの一番好きなパーツは、<br />
-              目・口・鼻・肌・手・足のどこ？
-            </p>
-
-            <div class="part-list" aria-label="選べるパーツ">
-              <span class="part-chip">目</span>
-              <span class="part-chip">口</span>
-              <span class="part-chip">鼻</span>
-              <span class="part-chip">肌</span>
-              <span class="part-chip">手</span>
-              <span class="part-chip">足</span>
-            </div>
-
-            <p class="booth-prompt">
-              ショーを待っている間や観ている間に、<br />
-              自分の好きなところを考えてみて！
-            </p>
-
-            <p class="booth-detail">
-              図書館横のちふれブースで、選んだパーツのBOXから
-              スキンケアやコスメをGETしよう！
-              <span class="booth-theme">
-                自分の好きなところを言葉にして、<br />
-                「自分をもっと好きになる」体験を楽しもう。
-              </span>
-            </p>
-          </section>
-
           <div class="result-actions">
-            <button class="btn btn-primary" type="button" id="showMapFromResultButton">会場案内でブースを確認する</button>
             <button class="btn btn-secondary" type="button" id="backButton">最初の画面に戻る</button>
-          </div>
-
-          <div class="map-area" id="venueMap">
-            <p class="map-explanation">
-              大ホールから左に進むと階段があります。<br />
-              その階段を降りた1階が、このマップのフロアです。
-            </p>
-            <img class="venue-map-image" src="venue-map.png" alt="Be⇒yond会場案内図" />
           </div>
         </div>
       </div>
@@ -899,13 +698,9 @@
 
       const startScreen = document.getElementById("startScreen");
       const drawingScreen = document.getElementById("drawingScreen");
-      const mapScreen = document.getElementById("mapScreen");
       const resultScreen = document.getElementById("resultScreen");
 
       const drawButton = document.getElementById("drawButton");
-      const mapButton = document.getElementById("mapButton");
-      const mapBackButton = document.getElementById("mapBackButton");
-      const showMapFromResultButton = document.getElementById("showMapFromResultButton");
       const backButton = document.getElementById("backButton");
 
       const fortuneName = document.getElementById("fortuneName");
@@ -987,21 +782,6 @@
           setResult(fortune, scene, mind, trivia);
           showScreen(resultScreen);
         }, 1200);
-      });
-
-      mapButton.addEventListener("click", function () {
-        showScreen(mapScreen);
-      });
-
-      mapBackButton.addEventListener("click", function () {
-        showScreen(startScreen);
-      });
-
-      showMapFromResultButton.addEventListener("click", function () {
-        document.getElementById("venueMap").scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
       });
 
       backButton.addEventListener("click", function () {
